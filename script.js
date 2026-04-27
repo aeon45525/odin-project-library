@@ -1,5 +1,6 @@
 const myLibrary = [];
 
+// creating objects
 function book(title, author, pages, year) {
   if (!new.target) {
     throw Error("You must use the 'new' operator to call the constructor");
@@ -11,6 +12,7 @@ function book(title, author, pages, year) {
   this.year = year;
 }
 
+// insert created objects to array
 function addBookToLibrary(title, author, pages, year) {
   const newBook = new book(title, author, pages, year);
   myLibrary.push(newBook);
@@ -36,9 +38,8 @@ addBookToLibrary(
 addBookToLibrary("Moby Dick", "Herman Melville", "635 pages", "1851");
 addBookToLibrary("The Alchemist", "Paulo Coelho", "208 pages", "1988");
 
-console.log(myLibrary);
-
 // DOM Manipulators
+// display each books to page
 const container = document.querySelector(".container");
 
 for (book of myLibrary) {
