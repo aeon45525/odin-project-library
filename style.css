@@ -31,11 +31,6 @@
   color: #68a691;
 }
 
-.bookDiv:hover {
-  background-color: #68a691;
-  color: #ffe5d4;
-}
-
 .infoDiv {
   font-family: Arial, Helvetica, sans-serif;
   font-weight: bold;
@@ -50,7 +45,40 @@
   font-weight: bold;
 }
 
+.title {
+  grid-column: 1 / 5;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 10px;
+}
+
+span,
+.NewBook {
+  border: 10px solid #68a691;
+  padding: 10px;
+  border-radius: 20px;
+
+  color: #68a691;
+  background-color: #ffe5d4;
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: bold;
+  font-size: 25px;
+}
+
+.NewBook {
+  padding: 8px;
+  font-size: 15px;
+}
+
 .editBookBtn:hover {
   color: #68a691;
   background-color: #ffe5d4;
+}
+
+.NewBook:hover,
+.bookDiv:hover {
+  background-color: #68a691;
+  color: #ffe5d4;
 }
