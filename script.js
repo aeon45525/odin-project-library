@@ -41,20 +41,16 @@ console.log(myLibrary);
 // DOM Manipulators
 const container = document.querySelector(".container");
 
-for (let i = 1; i <= myLibrary.length; i++) {
+for (book of myLibrary) {
   const bookDiv = document.createElement("div");
-  const titleDiv = document.createElement("div");
-  const authorDiv = document.createElement("div");
-  const pagesDiv = document.createElement("div");
-  const yearDiv = document.createElement("div");
-  const book = myLibrary[i - 1];
 
-  titleDiv.textContent = book.title;
-  authorDiv.textContent = book.author;
-  pagesDiv.textContent = book.pages;
-  yearDiv.textContent = book.year;
-
-  bookDiv.append(titleDiv, authorDiv, pagesDiv, yearDiv);
+  for (const [key, value] of Object.entries(book)) {
+    if (key === "id") continue;
+    const infoDiv = document.createElement("div");
+    infoDiv.textContent = value;
+    infoDiv.classList.add("infoDiv");
+    bookDiv.append(infoDiv);
+  }
   bookDiv.classList.add("bookDiv");
   container.append(bookDiv);
 }
