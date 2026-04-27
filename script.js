@@ -52,6 +52,15 @@ for (book of myLibrary) {
     infoDiv.classList.add("infoDiv");
     bookDiv.append(infoDiv);
   }
+
+  const buttonNames = ["Remove Book", "Mark as Read"];
+  for (let i = 0; i !== buttonNames.length; i++) {
+    const newButton = document.createElement("button");
+    newButton.textContent = buttonNames[i];
+    newButton.classList.add("editBookBtn");
+    bookDiv.append(newButton);
+  }
+
   bookDiv.classList.add("bookDiv");
   container.append(bookDiv);
 }
