@@ -1,7 +1,7 @@
 const myLibrary = [];
 
 // creating objects
-function book(title, author, pages, year) {
+function book(title, author, pages, read) {
   if (!new.target) {
     throw Error("You must use the 'new' operator to call the constructor");
   }
@@ -9,34 +9,34 @@ function book(title, author, pages, year) {
   this.title = title;
   this.author = author;
   this.pages = pages;
-  this.year = year;
+  this.read = read;
 }
 
 // insert created objects to array
-function addBookToLibrary(title, author, pages, year) {
-  const newBook = new book(title, author, pages, year);
+function addBookToLibrary(title, author, pages, read) {
+  const newBook = new book(title, author, pages, read);
   myLibrary.push(newBook);
 }
 
 // sample books
-addBookToLibrary("The Hobbit", "J.R.R. Tolkien", "310 pages", "1937");
-addBookToLibrary("To Kill a Mockingbird", "Harper Lee", "281 pages", "1960");
-addBookToLibrary("1984", "George Orwell", "328 pages", "1949");
+addBookToLibrary("The Hobbit", "J.R.R. Tolkien", "310 pages", "To Read");
+addBookToLibrary("To Kill a Mockingbird", "Harper Lee", "281 pages", "To Read");
+addBookToLibrary("1984", "George Orwell", "328 pages", "To Read");
 addBookToLibrary(
   "The Great Gatsby",
   "F. Scott Fitzgerald",
   "180 pages",
-  "1925",
+  "To Read",
 );
-addBookToLibrary("Pride and Prejudice", "Jane Austen", "432 pages", "1813");
+addBookToLibrary("Pride and Prejudice", "Jane Austen", "432 pages", "To Read");
 addBookToLibrary(
   "The Catcher in the Rye",
   "J.D. Salinger",
   "277 pages",
-  "1951",
+  "To Read",
 );
-addBookToLibrary("Moby Dick", "Herman Melville", "635 pages", "1851");
-addBookToLibrary("The Alchemist", "Paulo Coelho", "208 pages", "1988");
+addBookToLibrary("Moby Dick", "Herman Melville", "635 pages", "To Read");
+addBookToLibrary("The Alchemist", "Paulo Coelho", "208 pages", "To Read");
 
 // DOM Manipulators
 // display each books to page
@@ -64,3 +64,6 @@ for (book of myLibrary) {
   bookDiv.classList.add("bookDiv");
   container.append(bookDiv);
 }
+
+// add new book button
+const newBook = document.querySelector(".NewBook");
