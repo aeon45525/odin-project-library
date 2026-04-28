@@ -66,4 +66,7 @@ for (book of myLibrary) {
 }
 
 // add new book button
+const nbDialog = document.getElementById("nbDialog");
 const newBook = document.querySelector(".NewBook");
+
+newBook.addEventListener("click", () => nbDialog.showModal());

@@ -63,7 +63,7 @@ body {
   gap: 10px;
 }
 
-span,
+.spanTitle,
 .NewBook {
   border: 10px solid #68a691;
   padding: 10px;
@@ -90,4 +90,84 @@ span,
 .bookDiv:hover {
   background-color: #68a691;
   color: #ffe5d4;
+}
+
+/* NEW BOOK FORM / DIALOG */
+dialog {
+  padding: 0;
+  border: solid 15px #68a691;
+  background-color: #ffe5d4;
+  border-radius: 20px;
+}
+
+form {
+  height: 300px;
+  width: 300px;
+
+  color: #68a691;
+  background: transparent;
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: bold;
+
+  padding: 20px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 30px;
+}
+
+.nbSpan {
+  border: 5px solid #68a691;
+  padding: 10px 70px;
+  border-radius: 20px;
+
+  font-size: 15px;
+}
+
+.InputContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+}
+
+.inputFields {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.inputFields label {
+  width: 70px;
+  text-align: right;
+}
+
+.nbButtons button,
+.inputFields input {
+  padding: 5px;
+  border: solid 2px #68a691;
+  border-radius: 10px;
+  background-color: #ffe5d4;
+  color: #68a691;
+  font-weight: bold;
+}
+
+.nbButtons {
+  display: flex;
+  gap: 10px;
+}
+
+.nbButtons button {
+  width: 75px;
+}
+
+.nbButtons button:hover {
+  color: #ffe5d4;
+  background-color: #68a691;
+}
+
+.inputFields input:focus {
+  outline: solid 2px #68a691;
 }
