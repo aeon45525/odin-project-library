@@ -1,4 +1,4 @@
-const myLibrary = [];
+let myLibrary = [];
 
 // creating objects
 function book(title, author, pages, read) {
@@ -42,27 +42,30 @@ addBookToLibrary("The Alchemist", "Paulo Coelho", "208 pages", "To Read");
 // display each books to page
 const container = document.querySelector(".container");
 
-for (book of myLibrary) {
-  const bookDiv = document.createElement("div");
+function displayBooks() {
+  for (book of myLibrary) {
+    const bookDiv = document.createElement("div");
+    bookDiv.setAttribute("data-id", book.id); // attach book id to DOM so we can identify/remove this book later
 
-  for (const [key, value] of Object.entries(book)) {
-    if (key === "id") continue;
-    const infoDiv = document.createElement("div");
-    infoDiv.textContent = value;
-    infoDiv.classList.add("infoDiv");
-    bookDiv.append(infoDiv);
+    for (const [key, value] of Object.entries(book)) {
+      if (key === "id") continue;
+      const infoDiv = document.createElement("div");
+      infoDiv.textContent = value;
+      infoDiv.classList.add("infoDiv");
+      bookDiv.append(infoDiv);
+    }
+
+    const buttonNames = ["Remove Book", "Mark as Read"];
+    for (let i = 0; i !== buttonNames.length; i++) {
+      const newButton = document.createElement("button");
+      newButton.textContent = buttonNames[i];
+      newButton.classList.add("editBookBtn");
+      bookDiv.append(newButton);
+    }
+
+    bookDiv.classList.add("bookDiv");
+    container.append(bookDiv);
   }
-
-  const buttonNames = ["Remove Book", "Mark as Read"];
-  for (let i = 0; i !== buttonNames.length; i++) {
-    const newButton = document.createElement("button");
-    newButton.textContent = buttonNames[i];
-    newButton.classList.add("editBookBtn");
-    bookDiv.append(newButton);
-  }
-
-  bookDiv.classList.add("bookDiv");
-  container.append(bookDiv);
 }
 
 // add new book button
@@ -70,3 +73,16 @@ const nbDialog = document.getElementById("nbDialog");
 const newBook = document.querySelector(".NewBook");
 
 newBook.addEventListener("click", () => nbDialog.showModal());
+
+// remove book
+container.addEventListener("click", (event) => {
+  if (event.target.textContent === "Remove Book") {
+    const targetDiv = event.target.closest(".bookDiv");
+    const targetId = targetDiv.dataset.id;
+    myLibrary = myLibrary.filter((book) => book.id != targetId);
+  }
+  container.innerHTML = "";
+  displayBooks();
+});
+
+displayBooks();
