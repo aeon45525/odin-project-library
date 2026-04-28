@@ -53,21 +53,22 @@ function displayBooks() {
       bookDiv.append(infoDiv);
     }
 
-    const buttonNames = ["Remove Book", "Mark as Read"];
-    for (let i = 0; i !== buttonNames.length; i++) {
-      const newButton = document.createElement("button");
-      newButton.textContent = buttonNames[i];
-      newButton.classList.add("editBookBtn");
-      bookDiv.append(newButton);
-    }
+    // change button text depending on boolean
+    const removeBtn = document.createElement("button");
+    const markBtn = document.createElement("button");
+    removeBtn.classList.add("editBookBtn");
+    markBtn.classList.add("editBookBtn");
+
+    removeBtn.textContent = "Remove Book";
+    if (book.read === false) markBtn.textContent = "Mark as Read";
+    else markBtn.textContent = "Mark as Unread";
+
+    bookDiv.append(removeBtn, markBtn);
 
     bookDiv.classList.add("bookDiv");
     container.append(bookDiv);
   }
 }
-
-// const bookDiv = document.querySelectorAll(".bookDiv");
-// bookDiv.addEventListener("click");
 
 // add new book button
 const nbDialog = document.getElementById("nbDialog");
@@ -75,23 +76,28 @@ const newBook = document.querySelector(".NewBook");
 
 newBook.addEventListener("click", () => nbDialog.showModal());
 
+// buttons inside bookDiv
 // remove book
 container.addEventListener("click", (event) => {
+  const targetDiv = event.target.closest(".bookDiv");
+  const targetId = targetDiv.dataset.id;
   if (event.target.textContent === "Remove Book") {
-    const targetDiv = event.target.closest(".bookDiv");
-    const targetId = targetDiv.dataset.id;
     myLibrary = myLibrary.filter((book) => book.id != targetId);
 
     container.innerHTML = "";
     displayBooks();
   }
   // mark as read
-  else if (event.target.textContent === "Mark as Read") {
-    const targetDiv = event.target.closest(".bookDiv");
-    const targetId = targetDiv.dataset.id;
-
+  else if (
+    event.target.textContent === "Mark as Read" ||
+    event.target.textContent === "Mark as Unread"
+  ) {
     targetBook = myLibrary.find((book) => book.id === targetId);
-    targetBook.read = true;
+    if (targetBook.read === false) {
+      targetBook.read = true;
+    } else {
+      targetBook.read = false;
+    }
 
     container.innerHTML = "";
     displayBooks();

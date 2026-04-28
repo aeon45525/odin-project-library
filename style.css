@@ -50,6 +50,7 @@ body {
 }
 
 .editBookBtn {
+  width: 120px; /* prevent shifting when toggling read and unread*/
   padding: 5px;
   border: solid 2px #ffe5d4;
   border-radius: 10px;
