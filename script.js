@@ -9,7 +9,7 @@ function book(title, author, pages, read) {
   this.title = title;
   this.author = author;
   this.pages = pages;
-  this.read = read;
+  this.read = false; // from string to boolean
 }
 
 // insert created objects to array
@@ -19,24 +19,14 @@ function addBookToLibrary(title, author, pages, read) {
 }
 
 // sample books
-addBookToLibrary("The Hobbit", "J.R.R. Tolkien", "310 pages", "To Read");
-addBookToLibrary("To Kill a Mockingbird", "Harper Lee", "281 pages", "To Read");
-addBookToLibrary("1984", "George Orwell", "328 pages", "To Read");
-addBookToLibrary(
-  "The Great Gatsby",
-  "F. Scott Fitzgerald",
-  "180 pages",
-  "To Read",
-);
-addBookToLibrary("Pride and Prejudice", "Jane Austen", "432 pages", "To Read");
-addBookToLibrary(
-  "The Catcher in the Rye",
-  "J.D. Salinger",
-  "277 pages",
-  "To Read",
-);
-addBookToLibrary("Moby Dick", "Herman Melville", "635 pages", "To Read");
-addBookToLibrary("The Alchemist", "Paulo Coelho", "208 pages", "To Read");
+addBookToLibrary("The Hobbit", "J.R.R. Tolkien", "310 pages", false);
+addBookToLibrary("To Kill a Mockingbird", "Harper Lee", "281 pages", false);
+addBookToLibrary("1984", "George Orwell", "328 pages", false);
+addBookToLibrary("The Great Gatsby", "F. Scott Fitzgerald", "180 pages", false);
+addBookToLibrary("Pride and Prejudice", "Jane Austen", "432 pages", false);
+addBookToLibrary("The Catcher in the Rye", "J.D. Salinger", "277 pages", false);
+addBookToLibrary("Moby Dick", "Herman Melville", "635 pages", false);
+addBookToLibrary("The Alchemist", "Paulo Coelho", "208 pages", false);
 
 // DOM Manipulators
 // display each books to page
@@ -49,8 +39,16 @@ function displayBooks() {
 
     for (const [key, value] of Object.entries(book)) {
       if (key === "id") continue;
+
       const infoDiv = document.createElement("div");
-      infoDiv.textContent = value;
+      // boolean to text
+      if (key === "read" && !value) {
+        infoDiv.textContent = "To Read";
+      } else if (key === "read" && value) {
+        infoDiv.textContent = "Read";
+      } else {
+        infoDiv.textContent = value;
+      }
       infoDiv.classList.add("infoDiv");
       bookDiv.append(infoDiv);
     }
@@ -68,6 +66,9 @@ function displayBooks() {
   }
 }
 
+// const bookDiv = document.querySelectorAll(".bookDiv");
+// bookDiv.addEventListener("click");
+
 // add new book button
 const nbDialog = document.getElementById("nbDialog");
 const newBook = document.querySelector(".NewBook");
@@ -80,9 +81,21 @@ container.addEventListener("click", (event) => {
     const targetDiv = event.target.closest(".bookDiv");
     const targetId = targetDiv.dataset.id;
     myLibrary = myLibrary.filter((book) => book.id != targetId);
+
+    container.innerHTML = "";
+    displayBooks();
   }
-  container.innerHTML = "";
-  displayBooks();
+  // mark as read
+  else if (event.target.textContent === "Mark as Read") {
+    const targetDiv = event.target.closest(".bookDiv");
+    const targetId = targetDiv.dataset.id;
+
+    targetBook = myLibrary.find((book) => book.id === targetId);
+    targetBook.read = true;
+
+    container.innerHTML = "";
+    displayBooks();
+  }
 });
 
 displayBooks();
