@@ -40,7 +40,7 @@ addBookToLibrary("The Alchemist", "Paulo Coelho", "208 pages", "To Read");
 
 // DOM Manipulators
 // display each books to page
-const container = document.querySelector(".container");
+const container = document.querySelector(".bookContainer");
 
 function displayBooks() {
   for (book of myLibrary) {
