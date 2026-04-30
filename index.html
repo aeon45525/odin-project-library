@@ -17,26 +17,30 @@
 
       <!-- New Book Form -->
       <dialog id="nbDialog">
-        <form method="dialog">
+        <form id="nbForm" method="dialog">
           <span class="nbSpan">Enter New Book:</span>
           <div class="InputContainer">
             <div class="inputFields">
               <label for="title">Title:</label>
-              <input type="text" id="title" placeholder="The Hobbit" />
+              <input type="text" id="inputTitle" placeholder="The Hobbit" />
             </div>
             <div class="inputFields">
               <label for="author">Author:</label>
-              <input type="text" id="author" placeholder="J.R.R. Tolkien" />
+              <input
+                type="text"
+                id="inputAuthor"
+                placeholder="J.R.R. Tolkien"
+              />
             </div>
             <div class="inputFields">
               <label for="pages">Pages: </label>
-              <input type="text" id="pages" placeholder="310 pages" />
+              <input type="text" id="inputPages" placeholder="310 pages" />
             </div>
           </div>
           <div class="nbButtons">
-            <button type="button">Cancel</button>
-            <button type="reset">Clear</button>
-            <button type="submit">Add</button>
+            <button id="btnCancel" type="button">Cancel</button>
+            <button id="btnReset" type="reset">Clear</button>
+            <button id="btnSubmit" type="submit">Add</button>
           </div>
         </form>
       </dialog>

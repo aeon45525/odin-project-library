@@ -33,11 +33,11 @@ addBookToLibrary("The Alchemist", "Paulo Coelho", "208 pages", false);
 const container = document.querySelector(".bookContainer");
 
 function displayBooks() {
-  for (book of myLibrary) {
+  for (abook of myLibrary) {
     const bookDiv = document.createElement("div");
-    bookDiv.setAttribute("data-id", book.id); // attach book id to DOM so we can identify/remove this book later
+    bookDiv.setAttribute("data-id", abook.id); // attach book id to DOM so we can identify/remove this book later
 
-    for (const [key, value] of Object.entries(book)) {
+    for (const [key, value] of Object.entries(abook)) {
       if (key === "id") continue;
 
       const infoDiv = document.createElement("div");
@@ -71,10 +71,29 @@ function displayBooks() {
 }
 
 // add new book button
-const nbDialog = document.getElementById("nbDialog");
-const newBook = document.querySelector(".NewBook");
+const inputTitle = document.getElementById("inputTitle").value;
+const inputAuthor = document.getElementById("inputAuthor").value;
+const inputPages = document.getElementById("inputPages").value;
 
+const newBook = document.querySelector(".NewBook");
 newBook.addEventListener("click", () => nbDialog.showModal());
+
+const nbForm = document.getElementById("nbForm");
+
+const nbDialog = document.getElementById("nbDialog");
+nbDialog.addEventListener("click", (event) => {
+  if (event.target.textContent === "Add") {
+    addBookToLibrary(inputTitle, inputAuthor, `${inputPages} pages`, false);
+
+    container.innerHTML = "";
+    displayBooks();
+  } else if (event.target.textContent === "Cancel") {
+    nbDialog.close();
+  } else if (event.target.textContent === "Clear") {
+    nbForm.reset();
+  }
+  nbForm.reset();
+});
 
 // buttons inside bookDiv
 // remove book
@@ -83,9 +102,6 @@ container.addEventListener("click", (event) => {
   const targetId = targetDiv.dataset.id;
   if (event.target.textContent === "Remove Book") {
     myLibrary = myLibrary.filter((book) => book.id != targetId);
-
-    container.innerHTML = "";
-    displayBooks();
   }
   // mark as read
   else if (
@@ -98,10 +114,10 @@ container.addEventListener("click", (event) => {
     } else {
       targetBook.read = false;
     }
-
-    container.innerHTML = "";
-    displayBooks();
   }
+  nbForm.reset();
+  container.innerHTML = "";
+  displayBooks();
 });
 
 displayBooks();
