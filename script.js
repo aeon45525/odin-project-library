@@ -71,26 +71,48 @@ function displayBooks() {
 }
 
 // add new book button
-const inputTitle = document.getElementById("inputTitle").value;
-const inputAuthor = document.getElementById("inputAuthor").value;
-const inputPages = document.getElementById("inputPages").value;
+const nbDialog = document.getElementById("nbDialog");
+
+const inputTitle = document.getElementById("inputTitle");
+const inputAuthor = document.getElementById("inputAuthor");
+const inputPages = document.getElementById("inputPages");
 
 const newBook = document.querySelector(".NewBook");
 newBook.addEventListener("click", () => nbDialog.showModal());
 
 const nbForm = document.getElementById("nbForm");
+const alertDialog = document.getElementById("alertDialog");
+const closeAlert = document.getElementById("closeAlert");
+closeAlert.addEventListener("click", () => {
+  alertDialog.close();
+  nbDialog.showModal();
+});
 
-const nbDialog = document.getElementById("nbDialog");
 nbDialog.addEventListener("click", (event) => {
-  if (event.target.textContent === "Add") {
-    addBookToLibrary(inputTitle, inputAuthor, `${inputPages} pages`, false);
+  const button = event.target.closest("button");
+  if (!button) return;
 
-    container.innerHTML = "";
-    displayBooks();
-  } else if (event.target.textContent === "Cancel") {
+  if (button.id === "btnSubmit") {
+    if (
+      inputTitle.value === "" ||
+      inputAuthor.value === "" ||
+      inputPages.value === ""
+    ) {
+      nbDialog.close();
+      alertDialog.showModal();
+    } else {
+      addBookToLibrary(
+        inputTitle.value,
+        inputAuthor.value,
+        `${inputPages.value} pages`,
+        false,
+      );
+
+      container.innerHTML = "";
+      displayBooks();
+    }
+  } else if (button.id === "btnCancel") {
     nbDialog.close();
-  } else if (event.target.textContent === "Clear") {
-    nbForm.reset();
   }
   nbForm.reset();
 });

@@ -148,6 +148,13 @@ form {
   text-align: right;
 }
 
+#alertDialog {
+  padding: 20px;
+  text-align: center;
+}
+
+#alertMessage,
+#closeAlert,
 .nbButtons button,
 .inputFields input {
   padding: 5px;
@@ -156,6 +163,10 @@ form {
   background-color: #ffe5d4;
   color: #68a691;
   font-weight: bold;
+}
+
+#alertMessage {
+  border: none;
 }
 
 .nbButtons {
@@ -167,6 +178,7 @@ form {
   width: 75px;
 }
 
+#closeAlert:hover,
 .nbButtons button:hover {
   color: #ffe5d4;
   background-color: #68a691;
